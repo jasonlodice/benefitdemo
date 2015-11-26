@@ -13,7 +13,7 @@
     "angular-mocks": "^1.4.0"
   },
   "appPath": "app",
-  "moduleName": "benefitdemoApp",
+  "moduleName": "benefitApp",
   "overrides": {
     "bootstrap": {
       "main": [

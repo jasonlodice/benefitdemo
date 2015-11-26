@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name benefitdemoApp
+ * @name benefitApp
  * @description
- * # benefitdemoApp
+ * # benefitApp
  *
  * Main module of the application.
  */
 angular
-  .module('benefitdemoApp', [
+  .module('benefitApp', [
     'ngAnimate',
     'ngResource',
     'ngRoute',
@@ -18,14 +18,14 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        templateUrl: 'views/employees.html',
+        controller: 'EmployeeCtrl',
+        controllerAs: 'ctrl'
       })
       .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+        templateUrl: 'views/reports.html',
+        controller: 'ReportCtrl',
+        controllerAs: 'ctrl'
       })
       .otherwise({
         redirectTo: '/'
