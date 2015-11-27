@@ -15,6 +15,8 @@ namespace Lopay.Benefits.Server.Infrastructure
 		{
 			Mapper.CreateMap<Employee, EmployeeData>();
 			Mapper.CreateMap<EmployeeData, Employee>();
+			Mapper.CreateMap<Dependent, DependentData>();
+			Mapper.CreateMap<DependentData, Dependent>();
 		}
 	}
 }

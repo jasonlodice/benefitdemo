@@ -1,18 +1,89 @@
 <h2>Employee Detail</h2>
+
 <div class="panel panel-default">
   <div class="panel-heading">{{ctrl.employee.last}},
-    {{ctrl.employee.first}}</div>
+    {{ctrl.employee.first}}
+  </div>
   <div class="panel-body">
-    <form>
-			<div>Id: {{ctrl.employee.id}}</div>
-      <div class="form-group">
-        <lablel for="firstName">First Name</label>
-        <input type="text" id="firstName" class="form-control" ng-model="ctrl.employee.first" required />
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <form>
+            <div>Id:
+              {{ctrl.employee.id}}</div>
+            <div class="form-group">
+              <lablel for="firstName">First Name</label>
+              <input class="form-control" id="firstName" ng-model="ctrl.employee.first" ng-change="ctrl.calculatePaycheck()" required type="text"/>
+            </div>
+            <div class="form-group">
+              <lablel for="lastName">Last Name</label>
+              <input class="form-control" id="lastName" ng-model="ctrl.employee.last" required type="text"/>
+            </div>
+            <div class="form-group">
+              <lablel for="taxId">Tax Id</label>
+              <input class="form-control" id="taxId" ng-model="ctrl.employee.taxId" required type="text"/>
+            </div>
+            <div class="form-group">
+              <lablel for="grossPay">Gross Pay (per period)</label>
+              <div class="input-group">
+                <div class="input-group-addon">$</div>
+                <input class="form-control" id="grossPay" ng-change="ctrl.calculatePaycheck()" ng-model="ctrl.employee.grossPay" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" required step="0.01" type="number"/>
+              </div>
+            </div>
+          </form>
+          <table class="table">
+            <thead>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Type</th>
+            </thead>
+            <tbody>
+              <tr ng-repeat="dep in ctrl.employee.dependents">
+                <td>{{dep.first}}</td>
+                <td>{{dep.last}}</td>
+                <td>{{dep.dependentType}}</td>
+              </tr>
+            </tbody>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="col-md-6">
+          <table class="table">
+            <thead>
+              <th></th>
+              <th class="text-right">per paycheck ({{ctrl.payPeriods}})</th>
+              <th class="text-right">annual</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Gross Pay</td>
+                <td class="text-right">+{{ctrl.grossPay | currency}}</td>
+                <td class="text-right">+{{ctrl.grossPay * ctrl.payPeriods | currency}}</td>
+              </tr>
+							<tr>
+								<td>(Employee Benefit Cost)</td>
+								<td class="text-right">-{{ctrl.employeeCost | currency}}</td>
+								<td class="text-right">-{{ctrl.employeeCost * ctrl.payPeriods | currency}}</td>
+							</tr>
+							<tr>
+								<td>Employee Benefit Discount</td>
+								<td class="text-right">+{{ctrl.employeeDiscount | currency}}</td>
+								<td class="text-right">+{{ctrl.employeeDiscount * ctrl.payPeriods | currency}}</td>
+							</tr>
+							<tr>
+								<td>(Dependent Benefit Cost)</td>
+								<td class="text-right">-{{ctrl.dependentCost | currency}}</td>
+								<td class="text-right">-{{ctrl.dependentCost * ctrl.payPeriods | currency}}</td>
+							</tr>
+							<tr>
+								<td>Dependent Benefit Discount</td>
+								<td class="text-right">+{{ctrl.dependentDiscount | currency}}</td>
+								<td class="text-right">+{{ctrl.dependentDiscount * ctrl.payPeriods | currency}}</td>
+							</tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-			<div class="form-group">
-				<lablel for="lastName">Last Name</label>
-				<input type="text" id="lastName" class="form-control" ng-model="ctrl.employee.last" required />
-			</div>
-    </form>
+    </div>
   </div>
 </div>
