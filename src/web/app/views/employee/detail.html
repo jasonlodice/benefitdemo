@@ -51,34 +51,39 @@
           <table class="table">
             <thead>
               <th></th>
-              <th class="text-right">per paycheck ({{ctrl.payPeriods}})</th>
+              <th class="text-right">paycheck ({{ctrl.paycheck.payPeriods}})</th>
               <th class="text-right">annual</th>
             </thead>
             <tbody>
               <tr>
                 <td>Gross Pay</td>
-                <td class="text-right">+{{ctrl.grossPay | currency}}</td>
-                <td class="text-right">+{{ctrl.grossPay * ctrl.payPeriods | currency}}</td>
+                <td class="text-right">+{{ctrl.paycheck.grossPay | currency}}</td>
+                <td class="text-right">+{{ctrl.paycheck.grossPay * ctrl.paycheck.payPeriods | currency}}</td>
               </tr>
 							<tr>
 								<td>(Employee Benefit Cost)</td>
-								<td class="text-right">-{{ctrl.employeeCost | currency}}</td>
-								<td class="text-right">-{{ctrl.employeeCost * ctrl.payPeriods | currency}}</td>
+								<td class="text-right">-{{ctrl.paycheck.employeeCost | currency}}</td>
+								<td class="text-right">-{{ctrl.paycheck.employeeCost * ctrl.paycheck.payPeriods | currency}}</td>
 							</tr>
 							<tr>
 								<td>Employee Benefit Discount</td>
-								<td class="text-right">+{{ctrl.employeeDiscount | currency}}</td>
-								<td class="text-right">+{{ctrl.employeeDiscount * ctrl.payPeriods | currency}}</td>
+								<td class="text-right">+{{ctrl.paycheck.employeeDiscount | currency}}</td>
+								<td class="text-right">+{{ctrl.paycheck.employeeDiscount * ctrl.paycheck.payPeriods | currency}}</td>
 							</tr>
 							<tr>
 								<td>(Dependent Benefit Cost)</td>
-								<td class="text-right">-{{ctrl.dependentCost | currency}}</td>
-								<td class="text-right">-{{ctrl.dependentCost * ctrl.payPeriods | currency}}</td>
+								<td class="text-right">-{{ctrl.paycheck.dependentCost | currency}}</td>
+								<td class="text-right">-{{ctrl.paycheck.dependentCost * ctrl.paycheck.payPeriods | currency}}</td>
 							</tr>
 							<tr>
 								<td>Dependent Benefit Discount</td>
-								<td class="text-right">+{{ctrl.dependentDiscount | currency}}</td>
-								<td class="text-right">+{{ctrl.dependentDiscount * ctrl.payPeriods | currency}}</td>
+								<td class="text-right">+{{ctrl.paycheck.dependentDiscount | currency}}</td>
+								<td class="text-right">+{{ctrl.paycheck.dependentDiscount * ctrl.paycheck.payPeriods | currency}}</td>
+							</tr>
+							<tr class="success">
+								<td>Net Pay</td>
+								<td class="text-right"><strong>{{ctrl.paycheck.netPay | currency}}</strong></td>
+								<td class="text-right"><strong>{{ctrl.paycheck.netPay * ctrl.paycheck.payPeriods | currency}}</strong></td>
 							</tr>
             </tbody>
           </table>
