@@ -24,6 +24,10 @@ namespace Lopay.Benefits.Server
 			container.Install(FromAssembly.This());
 			WindsorHttpControllerActivator.Container = container;
 
+			//	initialize auto mapper
+			AutoMapperConfiguration.CreateMaps();
+
+			//	start the server
 			WebApp.Start("http://+:80/lopay");
 
 			Console.WriteLine("Web API server started...");
