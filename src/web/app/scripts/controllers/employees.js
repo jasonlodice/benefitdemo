@@ -8,10 +8,11 @@
  * Controller of the benefitApp
  */
 angular.module('benefitApp')
-  .controller('EmployeeCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('EmployeeCtrl', ['employeeService', function(employeeService) {
+    this.blue = 'red';
+    var self = this;
+
+    employeeService.getAll().then(function(result) {
+      self.employees = result.data;
+    });
+  }]);

@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Dispatcher;
 using System.Web.Http.ExceptionHandling;
 using Lopay.Benefits.Server.Infrastructure;
@@ -30,6 +31,10 @@ namespace Lopay.Benefits.Server
 #endif
 			serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 			serializerSettings.Converters.Add(new StringEnumConverter());
+
+			//	enable cors since web server is different port than api server
+			var cors = new EnableCorsAttribute("*", "*", "*");
+			configuration.EnableCors(cors);
 
 			//	use attribute routing
 			configuration.MapHttpAttributeRoutes();
