@@ -18,11 +18,16 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/employees.html',
-        controller: 'EmployeeCtrl',
+        templateUrl: 'views/employee/list.html',
+        controller: 'EmployeeListCtrl',
         controllerAs: 'ctrl'
       })
-      .when('/about', {
+			.when('/employee/:id', {
+				templateUrl: 'views/employee/detail.html',
+				controller: 'EmployeeDetailCtrl',
+				controllerAs: 'ctrl'
+			})
+      .when('/reports', {
         templateUrl: 'views/reports.html',
         controller: 'ReportCtrl',
         controllerAs: 'ctrl'

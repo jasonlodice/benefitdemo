@@ -1,0 +1,18 @@
+<h2>Employee Detail</h2>
+<div class="panel panel-default">
+  <div class="panel-heading">{{ctrl.employee.last}},
+    {{ctrl.employee.first}}</div>
+  <div class="panel-body">
+    <form>
+			<div>Id: {{ctrl.employee.id}}</div>
+      <div class="form-group">
+        <lablel for="firstName">First Name</label>
+        <input type="text" id="firstName" class="form-control" ng-model="ctrl.employee.first" required />
+      </div>
+			<div class="form-group">
+				<lablel for="lastName">Last Name</label>
+				<input type="text" id="lastName" class="form-control" ng-model="ctrl.employee.last" required />
+			</div>
+    </form>
+  </div>
+</div>
