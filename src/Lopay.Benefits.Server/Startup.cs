@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
 using System.Web.Http.Dispatcher;
 using System.Web.Http.ExceptionHandling;
-using Lopay.Benefits.Server.Csh.Xrs.Web.Infrastructure.WebApi;
+using Lopay.Benefits.Server.Infrastructure;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -35,7 +35,7 @@ namespace Lopay.Benefits.Server
 			configuration.MapHttpAttributeRoutes();
 
 			//	custom factory for web api controllers
-			configuration.Services.Replace(typeof(IHttpControllerActivator), new WindsorHttpControllerActivator(container));
+			configuration.Services.Replace(typeof(IHttpControllerActivator), new WindsorHttpControllerActivator());
 
 			// Global Exception Logger (log exceptions to NLog)
 			configuration.Services.Add(typeof(IExceptionLogger), new NLogExceptionLogger());

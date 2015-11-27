@@ -16,7 +16,7 @@ using System.Text;
 using System.Web.Http.ExceptionHandling;
 using NLog;
 
-namespace Lopay.Benefits.Server
+namespace Lopay.Benefits.Server.Infrastructure
 {
 	/// <summary>
 	/// Logs exceptions originating in the Web API framework
