@@ -14,10 +14,5 @@ namespace Lopay.Benefits.Server.Domain.Entities
 		///	Depdendent Last Name
 		/// </summary>
 		public string Last { get; set; }
-
-		/// <summary>
-		/// Dependent Type
-		/// </summary>
-		public DependentType DependentType { get; set; }
 	}
 }
