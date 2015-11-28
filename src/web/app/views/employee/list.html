@@ -1,19 +1,25 @@
 <h2>Employees</h2>
 <table class="table table-hover">
-	<thead>
-		<tr>
-			<th>Id</th>
-			<th>Last Name</th>
-			<th>First Name</th>
-			<th>Tax Id</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr ng-repeat="emp in ctrl.employees track by emp.id" ng-click="ctrl.selectEmployee(emp)">
-			<td>{{emp.id}}</td>
-			<td>{{emp.last}}</td>
-			<td>{{emp.first}}</td>
-			<td>{{emp.taxId}}</td>
-		</tr>
-	</tbody>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Last Name</th>
+      <th>First Name</th>
+      <th>Tax Id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="emp in ctrl.employees track by emp.id">
+      <td>{{emp.id}}</td>
+      <td>{{emp.last}}</td>
+      <td>{{emp.first}}</td>
+      <td>{{emp.taxId}}</td>
+    </tr>
+  </tbody>
 </table>
+<div>
+  <button class="btn btn-default btn-small" ng-click="ctrl.newEmployee()">
+    <span class="glyphicon glyphicon-plus"></span>
+    Add Employee
+  </button>
+</div>

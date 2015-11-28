@@ -1,57 +1,100 @@
-<h2>Employee Detail</h2>
-
 <div class="panel panel-default">
-  <div class="panel-heading">{{ctrl.employee.last}},
-    {{ctrl.employee.first}}
+  <div class="panel-heading">
+    <strong>{{ctrl.employee.last}},
+      {{ctrl.employee.first}}</strong>
   </div>
   <div class="panel-body">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-6">
-          <form>
-            <div>Id:
-              {{ctrl.employee.id}}</div>
+          <h4>Employee Detail</h4>
+          <form name="employeeForm" novalidate>
             <div class="form-group">
-              <lablel for="firstName">First Name</label>
-              <input class="form-control" id="firstName" ng-model="ctrl.employee.first" ng-change="ctrl.calculatePaycheck()" required type="text"/>
+              <label class="control-label" for="empId">Id</label>
+              <input class="form-control" id="empId" ng-model="ctrl.employee.id" readonly type="text"/>
             </div>
-            <div class="form-group">
-              <lablel for="lastName">Last Name</label>
-              <input class="form-control" id="lastName" ng-model="ctrl.employee.last" required type="text"/>
-            </div>
-            <div class="form-group">
-              <lablel for="taxId">Tax Id</label>
-              <input class="form-control" id="taxId" ng-model="ctrl.employee.taxId" required type="text"/>
-            </div>
-            <div class="form-group">
-              <lablel for="grossPay">Gross Pay (per period)</label>
-              <div class="input-group">
-                <div class="input-group-addon">$</div>
-                <input class="form-control" id="grossPay" ng-change="ctrl.calculatePaycheck()" ng-model="ctrl.employee.grossPay" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" required step="0.01" type="number"/>
+            <div class="form-group" ng-class="{ 'has-error': employeeForm.firstName.$invalid }">
+              <label class="control-label">First Name</label>
+              <input class="form-control" name="firstName" ng-model="ctrl.employee.first" ng-change="ctrl.calculatePaycheck()" required type="text"/>
+              <div ng-messages="employeeForm.firstName.$error" class="validation-msg">
+                <div ng-message="required">First Name is required.</div>
               </div>
             </div>
+            <div class="form-group" ng-class="{ 'has-error': employeeForm.lastName.$invalid }">
+              <label class="control-label">Last Name</label>
+              <input class="form-control" name="lastName" ng-model="ctrl.employee.last" required type="text"/>
+							<div ng-messages="employeeForm.lastName.$error" class="validation-msg">
+								<div ng-message="required">Last Name is required.</div>
+							</div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': employeeForm.taxId.$invalid }">
+              <label class="control-label">Tax Id</label>
+              <input class="form-control" name="taxId" ng-model="ctrl.employee.taxId" required type="text"/>
+							<div ng-messages="employeeForm.taxId.$error" class="validation-msg">
+								<div ng-message="required">Tax Id is required.</div>
+							</div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': employeeForm.grossPay.$invalid }">
+              <label class="control-label">Gross Pay (per period)</label>
+              <div class="input-group">
+                <div class="input-group-addon">$</div>
+                <input class="form-control" name="grossPay" ng-change="ctrl.calculatePaycheck()" ng-model="ctrl.employee.grossPay" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" required step="0.01" type="number"/>
+              </div>
+							<div ng-messages="employeeForm.grossPay.$error" class="validation-msg">
+								<div ng-message="required">Gross Pay is required.</div>
+							</div>
+            </div>
+            <button class="btn btn-default btn-small" ng-click="ctrl.save()" ng-disabled="!(employeeForm.$dirty && employeeForm.$valid)">
+              <span class="glyphicon glyphicon-floppy-disk"></span>
+              Save
+            </button>
           </form>
+          <h4>Dependents</h4>
           <table class="table">
             <thead>
               <th>First Name</th>
               <th>Last Name</th>
-              <th>Type</th>
+              <th></th>
             </thead>
             <tbody>
               <tr ng-repeat="dep in ctrl.employee.dependents">
                 <td>{{dep.first}}</td>
                 <td>{{dep.last}}</td>
-                <td>{{dep.dependentType}}</td>
+                <td>
+                  <button class="btn btn-default btn-small" ng-click="ctrl.deleteDependent(dep)">
+                    <span class="glyphicon glyphicon-trash"></span>
+                  </button>
+                </td>
               </tr>
             </tbody>
-            <tbody></tbody>
           </table>
+          <div ng-show="!ctrl.editingDependent">
+            <button class="btn btn-default btn-small" ng-click="ctrl.startNewDependent()" ng-disabled="!ctrl.employee.id">
+              <span class="glyphicon glyphicon-plus"></span>
+              Add Dependent
+            </button>
+          </div>
+          <div class="well well-sm" ng-show="ctrl.editingDependent">
+            <form>
+              <div class="form-group">
+                <label class="control-label" for="d-firstName">First Name</label>
+                <input class="form-control" id="d-firstName" ng-model="ctrl.newDependent.first" required type="text"/>
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="d-lastName">Last Name</label>
+                <input class="form-control" id="d-lastName" ng-model="ctrl.newDependent.last" required type="text"/>
+              </div>
+            </form>
+            <input ng-click="ctrl.saveDependent()" type="submit" value="Save"/>
+            <input ng-click="ctrl.cancelDependent()" type="submit" value="Cancel"/>
+          </div>
         </div>
         <div class="col-md-6">
+          <h4>Paycheck Preview</h4>
           <table class="table">
             <thead>
               <th></th>
-              <th class="text-right">paycheck ({{ctrl.paycheck.payPeriods}})</th>
+              <th class="text-right">per period ({{ctrl.paycheck.payPeriods}})</th>
               <th class="text-right">annual</th>
             </thead>
             <tbody>
@@ -60,31 +103,35 @@
                 <td class="text-right">+{{ctrl.paycheck.grossPay | currency}}</td>
                 <td class="text-right">+{{ctrl.paycheck.grossPay * ctrl.paycheck.payPeriods | currency}}</td>
               </tr>
-							<tr>
-								<td>(Employee Benefit Cost)</td>
-								<td class="text-right">-{{ctrl.paycheck.employeeCost | currency}}</td>
-								<td class="text-right">-{{ctrl.paycheck.employeeCost * ctrl.paycheck.payPeriods | currency}}</td>
-							</tr>
-							<tr>
-								<td>Employee Benefit Discount</td>
-								<td class="text-right">+{{ctrl.paycheck.employeeDiscount | currency}}</td>
-								<td class="text-right">+{{ctrl.paycheck.employeeDiscount * ctrl.paycheck.payPeriods | currency}}</td>
-							</tr>
-							<tr>
-								<td>(Dependent Benefit Cost)</td>
-								<td class="text-right">-{{ctrl.paycheck.dependentCost | currency}}</td>
-								<td class="text-right">-{{ctrl.paycheck.dependentCost * ctrl.paycheck.payPeriods | currency}}</td>
-							</tr>
-							<tr>
-								<td>Dependent Benefit Discount</td>
-								<td class="text-right">+{{ctrl.paycheck.dependentDiscount | currency}}</td>
-								<td class="text-right">+{{ctrl.paycheck.dependentDiscount * ctrl.paycheck.payPeriods | currency}}</td>
-							</tr>
-							<tr class="success">
-								<td>Net Pay</td>
-								<td class="text-right"><strong>{{ctrl.paycheck.netPay | currency}}</strong></td>
-								<td class="text-right"><strong>{{ctrl.paycheck.netPay * ctrl.paycheck.payPeriods | currency}}</strong></td>
-							</tr>
+              <tr>
+                <td>(Employee Benefit Cost)</td>
+                <td class="text-right">-{{ctrl.paycheck.employeeCost | currency}}</td>
+                <td class="text-right">-{{ctrl.paycheck.employeeCost * ctrl.paycheck.payPeriods | currency}}</td>
+              </tr>
+              <tr>
+                <td>Employee Benefit Discount</td>
+                <td class="text-right">+{{ctrl.paycheck.employeeDiscount | currency}}</td>
+                <td class="text-right">+{{ctrl.paycheck.employeeDiscount * ctrl.paycheck.payPeriods | currency}}</td>
+              </tr>
+              <tr>
+                <td>(Dependent Benefit Cost)</td>
+                <td class="text-right">-{{ctrl.paycheck.dependentCost | currency}}</td>
+                <td class="text-right">-{{ctrl.paycheck.dependentCost * ctrl.paycheck.payPeriods | currency}}</td>
+              </tr>
+              <tr>
+                <td>Dependent Benefit Discount</td>
+                <td class="text-right">+{{ctrl.paycheck.dependentDiscount | currency}}</td>
+                <td class="text-right">+{{ctrl.paycheck.dependentDiscount * ctrl.paycheck.payPeriods | currency}}</td>
+              </tr>
+              <tr class="success">
+                <td>Net Pay</td>
+                <td class="text-right">
+                  <strong>{{ctrl.paycheck.netPay | currency}}</strong>
+                </td>
+                <td class="text-right">
+                  <strong>{{ctrl.paycheck.netPay * ctrl.paycheck.payPeriods | currency}}</strong>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>

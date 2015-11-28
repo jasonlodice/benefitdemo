@@ -71,6 +71,7 @@ namespace Lopay.Benefits.Server.Domain.Services
 
 		public void Create(Employee employee)
 		{
+			employee.Id = _employees.Max(x => x.Id) + 1;
 			_employees.Add(employee);
 		}
 

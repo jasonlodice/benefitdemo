@@ -122,7 +122,6 @@
     <Compile Include="Controllers\Data\EmployeeData.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Domain\Entities\Dependent.cs" />
-    <Compile Include="Domain\Entities\DependentType.cs" />
     <Compile Include="Domain\Entities\Employee.cs" />
     <Compile Include="Domain\Services\EmployeeRepository.cs" />
     <Compile Include="Domain\Services\IEmployeeRepository.cs" />

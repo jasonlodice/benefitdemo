@@ -26,16 +26,14 @@ angular.module('benefitApp')
 			//	count vip dependents
 			var vipDependents = 0;
 			angular.forEach(employee.dependents, function(dep) {
-				if (qualifiesForVipDiscount(dep)) {
-					vipDependents++;
-				}
+				vipDependents += qualifiesForVipDiscount(dep) ? 1 : 0;
 			});
 
 			paycheck.payPeriods = paycheckConfigService.payPeriods;
-      paycheck.grossPay = employee.grossPay;
+      paycheck.grossPay = employee.grossPay || 0;
 			paycheck.employeeCost = perPeriodEmpCost;
       paycheck.employeeDiscount = qualifiesForVipDiscount(employee) ? perPeriodEmpDiscount : 0;
-      paycheck.dependentCost = employee.dependents.length * perPeriodDependentCost;
+      paycheck.dependentCost = employee.dependents ? employee.dependents.length * perPeriodDependentCost : 0;
       paycheck.dependentDiscount = vipDependents * perPeriodDependentDiscount;
       paycheck.netPay = paycheck.grossPay - paycheck.employeeCost + paycheck.employeeDiscount - paycheck.dependentCost + paycheck.dependentDiscount;
 			return paycheck;
