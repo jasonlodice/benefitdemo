@@ -10,8 +10,15 @@ using Owin;
 
 namespace Lopay.Benefits.Server
 {
+	/// <summary>
+	/// OWIN configuration
+	/// </summary>
 	public class Startup
 	{
+		/// <summary>
+		/// Called configure OWIN application
+		/// </summary>
+		/// <param name="appBuilder"></param>
 		public void Configuration(IAppBuilder appBuilder)
 		{
 			//	server web api from 

@@ -6,6 +6,9 @@ using Newtonsoft.Json;
 
 namespace Lopay.Benefits.Server.Domain.Services
 {
+	/// <summary>
+	/// Service for interacting with Employee Entities
+	/// </summary>
 	public class EmployeeRepository : IEmployeeRepository
 	{
 		private readonly List<Employee> _employees = new List<Employee>();
@@ -34,6 +37,9 @@ namespace Lopay.Benefits.Server.Domain.Services
 			}
 		}
 
+		/// <summary>
+		/// Load employee entities from json file at <see cref="DbFilePath"/>
+		/// </summary>
 		private void LoadFromFile()
 		{
 			using (var sr = File.OpenText(DbFilePath))
@@ -45,6 +51,9 @@ namespace Lopay.Benefits.Server.Domain.Services
 			}
 		}
 
+		/// <summary>
+		/// Save employee entities to json file at <see cref="DbFilePath"/>
+		/// </summary>
 		private void SaveToFile()
 		{
 			using (var fs = File.Open(DbFilePath, FileMode.OpenOrCreate))
@@ -59,22 +68,38 @@ namespace Lopay.Benefits.Server.Domain.Services
 
 		#endregion
 
+		/// <summary>
+		/// Get Employee entity by Id
+		/// </summary>
+		/// <param name="id">Employee entity id</param>
+		/// <returns></returns>
 		public Employee Get(int id)
 		{
 			return _employees.FirstOrDefault(x => x.Id == id);
 		}
 
+		/// <summary>
+		/// Get all Employee entities
+		/// </summary>
+		/// <returns></returns>
 		public IEnumerable<Employee> GetAll()
 		{
 			return _employees;
 		}
 
+		/// <summary>
+		/// Add a new employee entity
+		/// </summary>
+		/// <param name="employee"></param>
 		public void Create(Employee employee)
 		{
 			employee.Id = _employees.Max(x => x.Id) + 1;
 			_employees.Add(employee);
 		}
 
+		/// <summary>
+		/// Persist changes in the repository
+		/// </summary>
 		public void Save()
 		{
 			SaveToFile();

@@ -35,6 +35,9 @@ namespace Lopay.Benefits.Server.Domain.Entities
 		/// </summary>
 		public double GrossPay { get; set; }
 
+		/// <summary>
+		/// Dependents of the Employee
+		/// </summary>
 		public IList<Dependent> Dependents
 		{
 			get { return _dependents ?? (_dependents = new List<Dependent>()); }

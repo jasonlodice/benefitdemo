@@ -22,10 +22,7 @@ namespace Lopay.Benefits.Server.Infrastructure
 		/// <param name="request">The message request.</param>
 		/// <param name="controllerDescriptor">The HTTP controller descriptor.</param>
 		/// <param name="controllerType">The type of the controller.</param>
-		public IHttpController Create(
-			HttpRequestMessage request,
-			HttpControllerDescriptor controllerDescriptor,
-			Type controllerType)
+		public IHttpController Create(HttpRequestMessage request, HttpControllerDescriptor controllerDescriptor, Type controllerType)
 		{
 			var controller =
 				(IHttpController)Container.Resolve(controllerType);
@@ -39,16 +36,16 @@ namespace Lopay.Benefits.Server.Infrastructure
 
 		private class Release : IDisposable
 		{
-			private readonly Action release;
+			private readonly Action _release;
 
 			public Release(Action release)
 			{
-				this.release = release;
+				_release = release;
 			}
 
 			public void Dispose()
 			{
-				release();
+				_release();
 			}
 		}
 	}

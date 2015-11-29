@@ -9,17 +9,28 @@ using NLog;
 
 namespace Lopay.Benefits.Server.Controllers
 {
+	/// <summary>
+	/// Web API controller for Employee data
+	/// </summary>
 	[RoutePrefix("api/employee")]
 	public class EmployeeController : ApiController
 	{
 		private readonly IEmployeeRepository _employeeRepository;
 		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <param name="employeeRepository">service for fetching employee entities</param>
 		public EmployeeController(IEmployeeRepository employeeRepository)
 		{
 			_employeeRepository = employeeRepository;
 		}
 
+		/// <summary>
+		/// Get all employees
+		/// </summary>
+		/// <returns></returns>
 		[Route]
 		public IEnumerable<EmployeeData> Get()
 		{
@@ -27,6 +38,11 @@ namespace Lopay.Benefits.Server.Controllers
 			return employees.Select(Mapper.Map<EmployeeData>);
 		}
 
+		/// <summary>
+		/// Get a single employee by id
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		[Route("{id}")]
 		public EmployeeData Get(int id)
 		{
@@ -34,6 +50,11 @@ namespace Lopay.Benefits.Server.Controllers
 			return Mapper.Map<EmployeeData>(employee);			
 		}
 
+		/// <summary>
+		/// Save a new employee
+		/// </summary>
+		/// <param name="data">Employee data to save</param>
+		/// <returns></returns>
 		[Route]
 		public EmployeeData Post(EmployeeData data)
 		{
@@ -44,6 +65,12 @@ namespace Lopay.Benefits.Server.Controllers
 			return Mapper.Map<EmployeeData>(employee);
 		}
 
+		/// <summary>
+		/// Update an existing employee
+		/// </summary>
+		/// <param name="id">Id of Employee to update</param>
+		/// <param name="data">Employee data to update</param>
+		/// <returns></returns>
 		[Route("{id}")]
 		public EmployeeData Put(int id, [FromBody]EmployeeData data)
 		{

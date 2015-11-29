@@ -37,5 +37,8 @@
   },
   "scripts": {
     "test": "grunt test"
+  },
+  "dependencies": {
+    "karma-spec-reporter": "0.0.23"
   }
 }

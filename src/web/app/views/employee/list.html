@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="emp in ctrl.employees track by emp.id">
+    <tr ng-repeat="emp in ctrl.employees track by emp.id" ng-click="ctrl.selectEmployee(emp)">
       <td>{{emp.id}}</td>
       <td>{{emp.last}}</td>
       <td>{{emp.first}}</td>

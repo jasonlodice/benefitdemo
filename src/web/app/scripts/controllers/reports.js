@@ -8,10 +8,6 @@
  * Controller of the benefitApp
  */
 angular.module('benefitApp')
-  .controller('ReportsCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('ReportsCtrl', function() {
+		
+	});
