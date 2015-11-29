@@ -8,6 +8,6 @@
  * Controller of the benefitApp
  */
 angular.module('benefitApp')
-  .controller('ReportsCtrl', function() {
-		
-	});
+  .controller('ReportsCtrl', function () {
+
+  });

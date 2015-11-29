@@ -17,11 +17,11 @@ angular
 		'ngMessages'
   ])
   .config(function ($routeProvider) {
-    $routeProvider
+  	$routeProvider
       .when('/', {
-        templateUrl: 'views/employee/list.html',
-        controller: 'EmployeeListCtrl',
-        controllerAs: 'ctrl'
+      	templateUrl: 'views/employee/list.html',
+      	controller: 'EmployeeListCtrl',
+      	controllerAs: 'ctrl'
       })
 			.when('/employee/:id', {
 				templateUrl: 'views/employee/detail.html',
@@ -29,11 +29,11 @@ angular
 				controllerAs: 'ctrl'
 			})
       .when('/reports', {
-        templateUrl: 'views/reports.html',
-        controller: 'ReportCtrl',
-        controllerAs: 'ctrl'
+      	templateUrl: 'views/reports.html',
+      	controller: 'ReportCtrl',
+      	controllerAs: 'ctrl'
       })
       .otherwise({
-        redirectTo: '/'
+      	redirectTo: '/'
       });
   });

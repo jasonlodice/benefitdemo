@@ -1,9 +1,9 @@
 'use strict';
 
-describe('Controller: EmployeeDetailCtrl - new employee route', function() {
+describe('Controller: EmployeeDetailCtrl - new employee route', function () {
 
-  // load the controller's module
-  beforeEach(module('benefitApp'));
+	// load the controller's module
+	beforeEach(module('benefitApp'));
 
 	var ctrl,
 		routeParams = {
@@ -11,7 +11,7 @@ describe('Controller: EmployeeDetailCtrl - new employee route', function() {
 		};
 
 	// Initialize the controller
-	beforeEach(inject(function($controller, employeeService, $location, paycheckCalcService) {
+	beforeEach(inject(function ($controller, employeeService, $location, paycheckCalcService) {
 		//	no need to delay ctrl instantiation, so create for every spec
 		ctrl = $controller('EmployeeDetailCtrl', {
 			$routeParams: routeParams,
@@ -21,15 +21,15 @@ describe('Controller: EmployeeDetailCtrl - new employee route', function() {
 		});
 	}));
 
-  it('should initialize a default employee', function() {
-    expect(ctrl.employee.id).not.toBeDefined();
-  });
+	it('should initialize a default employee', function () {
+		expect(ctrl.employee.id).not.toBeDefined();
+	});
 
-	it('should default newDependent', function() {
-    expect(ctrl.newDependent).toEqual({});
-  });
+	it('should default newDependent', function () {
+		expect(ctrl.newDependent).toEqual({});
+	});
 
-	it('should not be editingDependent', function() {
-    expect(ctrl.editingDependent).toBe(false);
-  });
+	it('should not be editingDependent', function () {
+		expect(ctrl.editingDependent).toBe(false);
+	});
 });
