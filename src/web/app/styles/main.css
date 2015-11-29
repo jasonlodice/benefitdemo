@@ -1,5 +1,4 @@
 /*	style for ng-messages */
-.form-group .validation-msg
-{
+.form-group .validation-msg {
 	color: #a94442;
 }
