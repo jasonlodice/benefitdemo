@@ -5,7 +5,16 @@ version 0.14.0.
 
 ## Build & development
 
-Run `grunt` for building and `grunt serve` for preview.
+### Front End
+
+* built as a single page application using AngularJS
+* Run `grunt` for building and `grunt serve` for preview.
+
+### Back End
+
+* built using ASP.NET Web API 2
+* self hosted using OWIN
+* binds to http://+:80/lopay
 
 ## Testing
 
